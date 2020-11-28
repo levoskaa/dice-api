@@ -7,3 +7,6 @@ install:
 script:
   - dotnet build
   - dotnet test DiceAPITest/DiceAPITest.csproj
+  - docker build -t $DOCKER_USERNAME/dice-api:latest .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push $DOCKER_USERNAME/dice-api:latest
